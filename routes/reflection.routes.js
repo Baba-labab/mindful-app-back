@@ -29,6 +29,7 @@ router.get("/:id", isAuthenticated, (req, res) => {
 
 //POST one reflection /
 router.post("/", isAuthenticated, (req, res) => {
+    //console.log("BODY", req.body)
     Reflection.create(req.body)
         .then(newReflection => {
             console.log("new reflection", newReflection)
@@ -52,7 +53,7 @@ router.put("/:id", isAuthenticated, (req, res) => {
 });
 
 //DELETE one Reflection /:id
-router.get("/:id", isAuthenticated, (req, res) => {
+router.delete("/:id", isAuthenticated, (req, res) => {
     Reflection.findByIdAndDelete(req.params.id)
         .then(result => {
             console.log("deleted reflection")

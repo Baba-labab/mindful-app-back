@@ -52,7 +52,7 @@ router.put("/:id", isAuthenticated, (req, res) => {
 });
 
 //DELETE one exercise /:id
-router.get("/:id", isAuthenticated, (req, res) => {
+router.delete("/:id", isAuthenticated, (req, res) => {
     Exercise.findByIdAndDelete(req.params.id)
         .then(result => {
             console.log("deleted exercise")
