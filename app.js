@@ -6,6 +6,9 @@ const express = require("express");
 
 const app = express();
 
+//make public fildes inside 'public/' folder publicly accessible
+app.use(express.static('assets'))
+
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 

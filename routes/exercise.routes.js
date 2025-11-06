@@ -4,7 +4,7 @@ const { isAuthenticated } = require("../middleware/jwt.middleware");
 const Exercise = require("../models/Exercise.model");
 
 //GET all exercises /
-router.get("/", isAuthenticated, (req, res) => {
+router.get("/", (req, res) => {
     Exercise.find({})
         .then(allExercises => {
             console.log("all Exercises", allExercises)
@@ -16,7 +16,7 @@ router.get("/", isAuthenticated, (req, res) => {
 });
 
 //GET one exercise /:id
-router.get("/:id", isAuthenticated, (req, res) => {
+router.get("/:id", (req, res) => {
     Exercise.findById(req.params.id)
         .then(exercise => {
             console.log("found exercise", exercise)
@@ -28,7 +28,7 @@ router.get("/:id", isAuthenticated, (req, res) => {
 });
 
 //POST one exercise /
-router.post("/", isAuthenticated, (req, res) => {
+router.post("/",  (req, res) => {
     Exercise.create(req.body)
         .then(newExercise => {
             console.log("new exercise", newExercise)
@@ -40,7 +40,7 @@ router.post("/", isAuthenticated, (req, res) => {
 });
 
 //PUT one exercise /:id
-router.put("/:id", isAuthenticated, (req, res) => {
+router.put("/:id",  (req, res) => {
     Exercise.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then(updatedExercise => {
             console.log("updated exercise", updatedExercise)
@@ -52,7 +52,7 @@ router.put("/:id", isAuthenticated, (req, res) => {
 });
 
 //DELETE one exercise /:id
-router.delete("/:id", isAuthenticated, (req, res) => {
+router.delete("/:id",  (req, res) => {
     Exercise.findByIdAndDelete(req.params.id)
         .then(result => {
             console.log("deleted exercise")
