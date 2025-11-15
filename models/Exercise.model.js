@@ -7,7 +7,9 @@ const exerciseSchema = new Schema({
     tags: [ { type: String, required: true, 
         enum: [ "move", "breathe", "meditate", "stretch", "walk", "dance", "eat", "drink", "sleep", "connect", "watch", "listen", "reflect", "journal", "nature", "create", "play","calm down", "ground", "feel", "observe", "visualize"] } ],
     mediaUrl: { type: String },
+    mediaType: { type: String, enum: ["audio", "video"] },
     imgUrl: { type: String },
+    categoryImg: {type:String },
     duration: { type: String },
     timeLevel: { type: Number, enum: [ 1,2,3,4,5,6 ] },
     relReflections: { type: [ mongoose.Schema.Types.ObjectId ], ref: "Reflection"} 
