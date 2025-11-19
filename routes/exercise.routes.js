@@ -18,6 +18,7 @@ router.get("/", (req, res) => {
 //GET one exercise /:id
 router.get("/:id", (req, res) => {
     Exercise.findById(req.params.id)
+        .populate("relReflections")
         .then(exercise => {
             console.log("found exercise", exercise)
             res.status(200).json(exercise)
@@ -28,7 +29,7 @@ router.get("/:id", (req, res) => {
 });
 
 //POST one exercise /
-router.post("/",  (req, res) => {
+router.post("/", (req, res) => {
     Exercise.create(req.body)
         .then(newExercise => {
             console.log("new exercise", newExercise)
@@ -40,7 +41,7 @@ router.post("/",  (req, res) => {
 });
 
 //PUT one exercise /:id
-router.put("/:id",  (req, res) => {
+router.put("/:id", (req, res) => {
     Exercise.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then(updatedExercise => {
             console.log("updated exercise", updatedExercise)
@@ -52,7 +53,7 @@ router.put("/:id",  (req, res) => {
 });
 
 //DELETE one exercise /:id
-router.delete("/:id",  (req, res) => {
+router.delete("/:id", (req, res) => {
     Exercise.findByIdAndDelete(req.params.id)
         .then(result => {
             console.log("deleted exercise")

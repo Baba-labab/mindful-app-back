@@ -6,18 +6,19 @@ const Reflection = require("../models/Reflection.model.js")
 
 //GET all reflections 
 router.get("/", (req, res, next) => {
-    Reflection.find({}) 
-    .then(allReflections => {
-         res.status(200).json(allReflections);
-    })
-    .catch((error) => {
-        res.status(500).json( { message: "Failed to get all Reflections", error})
-    });
+    Reflection.find({})
+        .then(allReflections => {
+            res.status(200).json(allReflections);
+        })
+        .catch((error) => {
+            res.status(500).json({ message: "Failed to get all Reflections", error })
+        });
 });
 
 //GET one reflection /:id
 router.get("/:id", isAuthenticated, (req, res) => {
     Reflection.findById(req.params.id)
+        .populate("relatedExercise")
         .then(reflection => {
             console.log("found reflection", reflection)
             res.status(200).json(reflection)
