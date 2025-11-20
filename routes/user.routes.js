@@ -7,7 +7,7 @@ const User = require("../models/User.model")
 //GET user /:id
 router.get("/:id", isAuthenticated, (req, res) => {
     User.findById(req.params.id)
-        .populate("reflections")
+        
         .populate("favExercises")
         .then(user => {
             console.log("user", user)

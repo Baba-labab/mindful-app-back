@@ -15,6 +15,16 @@ router.get("/", (req, res, next) => {
         });
 });
 
+router.get("/user/:id", (req, res) => {
+    Reflection.find({ user: req.params.id })
+    .then(data => {
+        res.status(200).json(data)
+    })
+    .catch(error => {
+        res.status(500).json({ message: "Something went wrong"})
+    })
+})
+
 //GET one reflection /:id
 router.get("/:id", isAuthenticated, (req, res) => {
     Reflection.findById(req.params.id)

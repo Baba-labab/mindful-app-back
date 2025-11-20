@@ -17,7 +17,6 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Name is required."],
     },
-    reflections: { type: [mongoose.Schema.Types.ObjectId], ref: "Reflection" },
     favExercises: { type: [mongoose.Schema.Types.ObjectId], ref: "Exercise" }
   },
   {

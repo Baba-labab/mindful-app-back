@@ -5,6 +5,7 @@ date: { type: Date, required: true, default: Date.now },
 title: { type: String },
 text: { type: String, required: true }, 
 relatedExercise: { type: mongoose.Schema.Types.ObjectId, ref: "Exercise" }, 
+user: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, 
 mood: { type: String, enum: [
     "calm", "tired", "energized", "stressed", "content", "sad", "happy", "restless", "loved", "connected", "angry"
 ]}
