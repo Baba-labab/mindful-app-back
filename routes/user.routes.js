@@ -3,11 +3,12 @@ const { isAuthenticated } = require("../middleware/jwt.middleware.js")
 const router = express.Router();
 
 const User = require("../models/User.model")
+const Reflection = require("../models/Reflection.model.js")
 
 //GET user /:id
 router.get("/:id", isAuthenticated, (req, res) => {
     User.findById(req.params.id)
-        
+
         .populate("favExercises")
         .then(user => {
             console.log("user", user)
@@ -32,16 +33,20 @@ router.put("/:id", isAuthenticated, (req, res) => {
         })
 })
 //DELETE account /:id
-router.delete("/:id", isAuthenticated, (req, res) => {
-    User.findByIdAndDelete(req.params.id)
-        .then(result => {
-            console.log("User deleted");
-            res.status(204).send();
-        })
-        .catch(error => {
-            console.error("error", error);
-            res.status(500).json({ message: "Error deleting user", error })
-        })
+router.delete("/:id", isAuthenticated, async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const response = await Reflection.deleteMany({ user: userId });
+        console.log(response)
+        await User.findByIdAndDelete(userId);
+        console.log("User and reflections deleted");
+
+        res.status(200).json({message: "User and reflections deleted"})
+        
+    } catch(error) { 
+        console.error("error", error);
+        res.status(500).json({ message: "Error deleting user", error })
+    }
 })
 
 module.exports = router
